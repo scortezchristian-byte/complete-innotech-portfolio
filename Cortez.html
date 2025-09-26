@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Innotech Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    .contact-box {
+      background: rgba(20, 30, 50, 0.97);
+      border-radius: 18px;
+      box-shadow: 0 6px 32px #0cb7fa33, 0 1.5px 8px #0008;
+      padding: 2.5rem 2rem 2rem 2rem;
+      margin-bottom: 2rem;
+      border: 1.5px solid #19589744;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+    }
+    @media (max-width: 991.98px) {
+      .contact-box {
+        padding: 2rem 1rem 1.5rem 1rem;
+        max-width: 100%;
+        border-radius: 12px;
+      }
+    }
+    @media (max-width: 767.98px) {
+      .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+        max-width: 100vw;
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+      .contact-box {
+        padding: 1.2rem 0.5rem 1rem 0.5rem;
+        border-radius: 8px;
+      }
+      section {
+        border-radius: 0;
+        margin-bottom: 16px;
+      }
+      .hero {
+        padding: 32px 0 18px 0;
+        min-height: 220px;
+      }
+      .portfolio-img {
+        height: 120px;
+      }
+    }
+    .fadein-section {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(.77,0,.18,1), transform 0.8s cubic-bezier(.77,0,.18,1);
+    }
+    .fadein-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    body {
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      background: #222222;
+      color: #fffbfb;
+    }
+    .navbar {
+      background: #222222 !important;
+      border-bottom: 1px solid #0d279b;
+      box-shadow: none;
+    }
+    .navbar-brand {
+      font-weight: 900;
+      color: #7DF9FF !important;
+      letter-spacing: 1.5px;
+      font-size: 2.2rem;
+      line-height: 1.1;
+      padding-left: 0;
+      margin-right: 2rem;
+      text-align: left;
+      display: flex;
+      align-items: center;
+    }
+    .nav-link {
+      color: #f1f0f0 !important;
+      margin-left: 1rem;
+      position: relative;
+      transition: color 0.2s;
+    }
+    .nav-link.active,
+    .nav-link:hover {
+      color: #0cb7fa !important;
+    }
+    .nav-link.active::after {
+      content: '';
+      display: block;
+      margin: 0 auto;
+      width: 24px;
+      height: 2px;
+      background: #19e2e2;
+      border-radius: 1px;
+      margin-top: 2px;
+    }
+    .hero {
+      background: linear-gradient(rgba(31,32,32,0.85), rgba(31,32,32,0.85)), url('https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=1200&q=80') center center/cover no-repeat;
+      color: #7DF9FF;
+      padding: 72px 0 56px 0;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .hero h1 {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: heroFadeIn 1.2s cubic-bezier(.77,0,.18,1) 0.2s forwards;
+    }
+    .hero .typewrite {
+      border-right: 2px solid #7DF9FF;
+      font-size: 2.2rem;
+      font-weight: 600;
+      display: inline-block;
+      min-height: 2.5rem;
+    }
+    @keyframes heroFadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .portfolio-card {
+      opacity: 0;
+      transform: translateY(40px) scale(1);
+      transition: opacity 0.7s cubic-bezier(.77,0,.18,1), transform 0.7s cubic-bezier(.77,0,.18,1);
+      will-change: opacity, transform;
+    }
+    .portfolio-card.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      /* transition-delay will be set inline for staggered effect */
+    }
+    .portfolio-card:hover {
+      transform: translateY(-8px) scale(1.07);
+      box-shadow: 0 8px 32px #0cb7fa99;
+      z-index: 2;
+    }
+    .btn-primary {
+      background: #195897;
+      border: none;
+      border-radius: 6px;
+      padding: 0.75rem 2rem;
+      font-weight: 600;
+      box-shadow: none;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover {
+      background: #003e7c;
+    }
+    section {
+      background: #222222;
+      border-radius: 20px;
+      margin-bottom: 40px;
+      box-shadow: 0 2px 8px rgba(30,40,60,0.04);
+    }
+    h2 {
+      font-weight: 600;
+      color: #4497eb;
+      margin-bottom: 2rem;
+    }
+    .card {
+      border: none;
+      border-radius: 10px;
+      color: #222222;
+      box-shadow: 0 2px 8px rgb(29, 79, 228);
+      transition: box-shadow 0.2s;
+    }
+    .card:hover {
+      box-shadow: 0 4px 16px rgb(252, 1, 252);
+      transform: translate(-7px) scale(1.1);
+    }
+    .portfolio-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px 10px 0 0;
+
+      
+    }
+    .form-control {
+      border: none;
+      border-bottom: 1px solid #41bbf3;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      font-size: 1rem;
+      padding-left: 0;
+    }
+    .form-control:focus {
+      border-bottom: 1.5px solid #195897;
+      box-shadow: none;
+      background: transparent;
+    }
+    .form-label {
+      font-weight: 500;
+      color: #fff;
+      text-shadow: 0 1px 4px #195897;
+    }
+    .form-control, .form-control:focus {
+      color: #fff;
+    }
+    .form-control::placeholder {
+      color: #b6e0ff;
+      opacity: 1;
+    }
+    .card-body, .card-title, .card-text {
+      color: #222 !important;
+    }
+    .btn:focus {
+      box-shadow: none;
+    }
+    footer {
+      background: #131212;
+      color: #888;
+      padding: 24px 0 8px 0;
+      font-size: 0.95rem;
+      border-top: 1px solid #002a55;
+    }
+    .footer-social {
+      display: none;
+    }
+
+    @media (max-width: 767px) {
+      .hero {
+        padding: 48px 0 32px 0;
+      }
+      section {
+        margin-bottom: 20px;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+       @keyframes fadeDown {
+      1% {opacity: 0; transform: translate(-10px);}
+      100% { opacity: 1; transform: translate(0px);}
+      }
+    
+      @keyframes fadeUp {
+      1% {opacity: 0; transform: translate(-10px);}
+      100% { opacity: 1; transform: translate(0px);}
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="#" style="flex:0 0 auto;">Innotech</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="container">
+      <h1 class="display-5"><span class="typewrite" data-period="2000" data-type='["Innovate.", "Create.", "Inspire."]'></span></h1>
+      <p class="lead mb-4">Empowering your business with cutting-edge technology solutions.</p>
+      <a href="#services" class="btn btn-primary btn-lg">Get Started</a>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="py-5 fadein-section" id="services">
+    <div class="container">
+      <h2 class="text-center">Our Services</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Web Development</h5>
+              <p class="card-text">Custom websites and web apps tailored to your business needs using the latest technologies.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Mobile Solutions</h5>
+              <p class="card-text">Cross-platform mobile applications for seamless user experiences on any device.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Cloud Integration</h5>
+              <p class="card-text">Scalable cloud services to optimize your operations and drive digital transformation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Section -->
+  <section class="py-5 bg-dark" id="portfolio">
+    <div class="container">
+      <h2 class="text-center">Our Portfolio</h2>
+      <div class="row g-4">
+        <div class="col-sm-6 col-lg-3">
+          <div class="card h-100 portfolio-card">
+            <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80" alt="Project 1" class="portfolio-img">
+            <div class="card-body">
+              <p class="card-text">E-commerce Platform</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <div class="card h-100 portfolio-card">
+            <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?q=80&w=629&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Project 2" class="portfolio-img">
+            <div class="card-body">
+              <p class="card-text">Mobile Banking App</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <div class="card h-100 portfolio-card">
+            <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Project 3" class="portfolio-img">
+            <div class="card-body">
+              <p class="card-text">Healthcare Portal</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+          <div class="card h-100 portfolio-card">
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=400&q=80" alt="Project 4" class="portfolio-img">
+            <div class="card-body">
+              <p class="card-text">Analytics Dashboard</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Form Section -->
+  <section class="py-5 fadein-section" id="contact">
+    <div class="container">
+      <h2 class="text-center">Contact Us</h2>
+      <div class="row justify-content-center">
+  <div class="col-12 col-sm-10 col-md-8 col-lg-7 col-xl-6">
+          <div class="contact-box">
+            <form novalidate>
+              <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" required>
+                <div class="invalid-feedback">Please enter your name.</div>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" required pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$">
+                <div class="invalid-feedback">Please enter a valid email address.</div>
+              </div>
+              <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" id="message" rows="4" required></textarea>
+                <div class="invalid-feedback">Please enter your message.</div>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center">
+    <div class="container">
+      <div>
+        &copy; 2025 Innotech. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Typing animation for hero header
+    class TxtType {
+      constructor(el, toRotate, period) {
+        this.toRotate = toRotate;
+        this.el = el;
+        this.loopNum = 0;
+        this.period = parseInt(period, 10) || 2000;
+        this.txt = '';
+        this.isDeleting = false;
+        this.tick();
+      }
+      tick() {
+        let i = this.loopNum % this.toRotate.length;
+        let fullTxt = this.toRotate[i];
+        if (this.isDeleting) {
+          this.txt = fullTxt.substring(0, this.txt.length - 1);
+        } else {
+          this.txt = fullTxt.substring(0, this.txt.length + 1);
+        }
+        this.el.innerHTML = this.txt;
+        let that = this;
+        let delta = 120 - Math.random() * 60;
+        if (this.isDeleting) { delta /= 2; }
+        if (!this.isDeleting && this.txt === fullTxt) {
+          delta = this.period;
+          this.isDeleting = true;
+        } else if (this.isDeleting && this.txt === '') {
+          this.isDeleting = false;
+          this.loopNum++;
+          delta = 500;
+        }
+        setTimeout(function() { that.tick(); }, delta);
+      }
+    }
+    window.onload = function() {
+      // Typing effect
+      var elements = document.getElementsByClassName('typewrite');
+      for (var i = 0; i < elements.length; i++) {
+        var toRotate = elements[i].getAttribute('data-type');
+        var period = elements[i].getAttribute('data-period');
+        if (toRotate) {
+          new TxtType(elements[i], JSON.parse(toRotate), period);
+        }
+      }
+      // Portfolio fade-up animation
+      function revealOnScroll() {
+        var cards = document.querySelectorAll('.portfolio-card');
+        var fadeSections = document.querySelectorAll('.fadein-section');
+        var windowHeight = window.innerHeight;
+        // Portfolio cards with staggered effect
+        var visibleCount = 0;
+        for (var i = 0; i < cards.length; i++) {
+          var card = cards[i];
+          var position = card.getBoundingClientRect().top;
+          if (position < windowHeight - 60) {
+            if (!card.classList.contains('visible')) {
+              card.style.transitionDelay = (visibleCount * 0.15) + 's';
+              visibleCount++;
+            }
+            card.classList.add('visible');
+          }
+        }
+        // Fade-in sections
+        for (var j = 0; j < fadeSections.length; j++) {
+          var sec = fadeSections[j];
+          var secPos = sec.getBoundingClientRect().top;
+          if (secPos < windowHeight - 60) {
+            sec.classList.add('visible');
+          }
+        }
+      }
+      window.addEventListener('scroll', revealOnScroll);
+      revealOnScroll();
+    };
+    // Bootstrap form validation
+    (() => {
+      'use strict';
+      const forms = document.querySelectorAll('form');
+      Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    })();
+  </script>
+</body>
+</html>
